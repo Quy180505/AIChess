@@ -33,25 +33,16 @@ def checkStateGame(gs):
 
 MATE_SCORE = 99999
 
-def terminal_eval(gs, depth):
-    if gs.checkMate:
-        return True, (-MATE_SCORE if gs.whiteToMove else MATE_SCORE)
-    if gs.staleMate:
-        return True, 0
-    if depth == 0:
-        return True, scoreMaterial(gs.board)
-    return False, 0
-
 def findGreedyMove(gs, validMoves):
     bestMove = None
     maxScore = -float('inf')
     for move in validMoves:
-        gs.makeMove(move)       #thử đi
-        score = scoreMaterial(gs.board)# đánh giá sau khi thực hiện
+        gs.makeMove(move)
+        score = scoreMaterial(gs.board)
         if score > maxScore:
             maxScore = score
             bestMove = move
-        gs.undoMove()   #quay lại
+        gs.undoMove()
 
     else:
         minScore = float('inf')
@@ -63,15 +54,27 @@ def findGreedyMove(gs, validMoves):
                 bestMove = move
             gs.undoMove()
     return bestMove
+
+
+
+
+
+def terminal_eval(gs, depth):
+    if gs.checkMate:
+        return True, (-MATE_SCORE if gs.whiteToMove else MATE_SCORE)
+    if gs.staleMate:
+        return True, 0
+    if depth == 0:
+        return True, scoreMaterial(gs.board)
+    return False, 0
+
 def minmax(gs, depth, isMaximizingPlayer):
     is_term, val = terminal_eval(gs, depth)
     if is_term:
         return val
-
     validMoves = gs.getValidMoves()
     if not validMoves:
         return scoreMaterial(gs.board)
-
     if isMaximizingPlayer:
         bestVal = -float('inf')
         for move in validMoves:
@@ -93,12 +96,9 @@ def minmax(gs, depth, isMaximizingPlayer):
 
 
 def findBestMoveMinmax(gs, validMoves, depth):
-
     if not validMoves:
         return None
-
     bestMove = validMoves[0]
-
     if gs.whiteToMove:
         bestEval = -float('inf')
         for move in validMoves:

@@ -102,8 +102,8 @@ def main():
 
         # AI move finder (nếu tới lượt AI)
         if not gameOver and not humanTurn:
-            AIMove=SmartMoveFinder.findGreedyMove(gs,validMoves)
-            #AIMove = SmartMoveFinder.findBestMoveMinmax(gs, validMoves, depth=3)
+            #AIMove=SmartMoveFinder.findGreedyMove(gs,validMoves)
+            AIMove = SmartMoveFinder.findBestMoveMinmax(gs, validMoves, depth=3)
             gs.makeMove(AIMove)
             moveMade = True
             animate = True
@@ -182,7 +182,7 @@ def animateMove(move, screen, board, clock):
 
         screen.blit(IMAGES[move.pieceMoved], p.Rect(c * SQ_SIZE, r * SQ_SIZE, SQ_SIZE, SQ_SIZE))
         p.display.flip()
-        clock.tick(70)
+        clock.tick(40)
 
 
 def drawText(screen, text):
