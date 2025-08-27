@@ -42,7 +42,27 @@ def terminal_eval(gs, depth):
         return True, scoreMaterial(gs.board)
     return False, 0
 
+def findGreedyMove(gs, validMoves):
+    bestMove = None
+    maxScore = -float('inf')
+    for move in validMoves:
+        gs.makeMove(move)       #thử đi
+        score = scoreMaterial(gs.board)# đánh giá sau khi thực hiện
+        if score > maxScore:
+            maxScore = score
+            bestMove = move
+        gs.undoMove()   #quay lại
 
+    else:
+        minScore = float('inf')
+        for move in validMoves:
+            gs.makeMove(move)
+            score = scoreMaterial(gs.board)
+            if score < minScore:
+                minScore = score
+                bestMove = move
+            gs.undoMove()
+    return bestMove
 def minmax(gs, depth, isMaximizingPlayer):
     is_term, val = terminal_eval(gs, depth)
     if is_term:

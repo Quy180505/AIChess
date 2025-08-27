@@ -102,7 +102,8 @@ def main():
 
         # AI move finder (nếu tới lượt AI)
         if not gameOver and not humanTurn:
-            AIMove = SmartMoveFinder.findBestMoveMinmax(gs, validMoves, depth=3)
+            AIMove=SmartMoveFinder.findGreedyMove(gs,validMoves)
+            #AIMove = SmartMoveFinder.findBestMoveMinmax(gs, validMoves, depth=3)
             gs.makeMove(AIMove)
             moveMade = True
             animate = True
