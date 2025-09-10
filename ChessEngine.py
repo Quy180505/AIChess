@@ -47,7 +47,7 @@ class gameState():
             self.board[move.startRow][move.endCol]='--'
 
 
-        if move.pieceMoved[1]=='p' and abs(move.startRow-move.endRow)==2: #only on 2 square pawn advanced
+        if move.pieceMoved[1]=='p' and abs(move.startRow-move.endRow)==2:
             self.enpassantPossible=((move.startRow+move.endRow)//2,move.startCol)
         else:
             self.enpassantPossible=()

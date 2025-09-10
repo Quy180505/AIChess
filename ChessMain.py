@@ -7,9 +7,9 @@ from SmartMoveFinder import checkStateGame
 
 COLORS = [p.Color("#FFFFCC"), p.Color("#CC9933")]
 WIDTH = HEIGHT = 512
-DIMENSION = 8  # 8*8 chess board
-SQ_SIZE = HEIGHT // DIMENSION  # square size
-MAX_FPS = 15  # for animation
+DIMENSION = 8
+SQ_SIZE = HEIGHT // DIMENSION
+MAX_FPS = 15
 IMAGES = {}
 
 
